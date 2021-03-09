@@ -1,14 +1,27 @@
-import simpleaudio as sa
+### Packages ###
+
 import os, random, time
 import RPI.GPIO as GPIO
+import simpleaudio as sa
+
+
+### Config ###
 
 # Path to wave files
 audio_path = './'
 # GPIO pin number the switch is connected to
 switch_gpio_pin_number = 18
 
-#GPIO.setmode(GPIO.BCM)
-#GPIO.setup(switch_gpio_pin_number, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+
+### Setup GPIO ###
+
+# Setting GPIO mode to Broadcom
+GPIO.setmode(GPIO.BCM)
+# Set the GPIO pin to input and pull up
+GPIO.setup(switch_gpio_pin_number, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+
+
+### Functions ###
 
 def get_wave_files(path: str):
   # List of files in a given path
@@ -59,6 +72,8 @@ def switch_press():
   # Play the randomly selected wave file
   play_clip(selected_wave_file)
 
+
+### Main ###
 while True:
   # Get the state of the switch via GPIO
   switch_state = GPIO.input(switch_gpio_pin_number)
